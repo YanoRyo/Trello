@@ -20,10 +20,13 @@ class IntroActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
+        btnSignIn.setOnClickListener {
+            startActivity(Intent(this, SignInActivity::class.java))
+        }
         btnSignUP.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
-
         }
+
 
     }
 }
