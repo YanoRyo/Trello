@@ -15,18 +15,22 @@
         tools:targetApi="31">
         <activity
             android:name=".SplashActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Trello.NoActionBar">
+            android:theme="@style/Theme.Trello.NoActionBar"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--TODO(Step 2: Modify the activity tag as per our requirement.)-->
+        <!--START-->
+        <activity android:name=".IntroActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Trello.NoActionBar"/>
+        <!--END-->
     </application>
 
 </manifest>
