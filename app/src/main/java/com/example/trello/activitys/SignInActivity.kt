@@ -1,9 +1,10 @@
-package com.example.trello
+package com.example.trello.activitys
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.widget.Toolbar
+import com.example.trello.R
 
 class SignInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

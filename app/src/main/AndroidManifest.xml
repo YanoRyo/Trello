@@ -14,15 +14,18 @@
         android:theme="@style/Theme.Trello"
         tools:targetApi="31">
         <activity
-            android:name=".SignInActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Trello.NoActionBar"  />
+            android:name=".BaseActivity"
+            android:exported="false" />
         <activity
-            android:name=".SignUpActivity"
+            android:name=".activitys.SignInActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Trello.NoActionBar" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".activitys.SignUpActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Trello.NoActionBar" />
+        <activity
+            android:name=".activitys.SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Trello.NoActionBar">
@@ -34,7 +37,7 @@
         </activity> <!-- TODO(Step 2: Modify the activity tag as per our requirement.) -->
         <!-- START -->
         <activity
-            android:name=".IntroActivity"
+            android:name=".activitys.IntroActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Trello.NoActionBar" />
     </application>

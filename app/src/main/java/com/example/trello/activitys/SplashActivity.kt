@@ -1,4 +1,4 @@
-package com.example.trello
+package com.example.trello.activitys
 
 import android.content.Intent
 import android.graphics.Typeface
@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
 import android.widget.TextView
+import com.example.trello.R
 
 class SplashActivity : AppCompatActivity() {
 
@@ -24,7 +25,7 @@ class SplashActivity : AppCompatActivity() {
         appName.typeface = typeFace
 
         Handler().postDelayed({
-            startActivity(Intent(this,IntroActivity::class.java))
+            startActivity(Intent(this, IntroActivity::class.java))
             finish()
         },2500)
     }
