@@ -8,6 +8,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.example.trello.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class SignUpActivity : BaseActivity() {
 
@@ -61,45 +63,59 @@ class SignUpActivity : BaseActivity() {
         password = findViewById(R.id.et_password)
 
 
-        if (name?.getText().toString().length >= 0) {
-            val trimName = name?.getText().toString().trim { it <= ' ' }
-        } else {
-            name?.setError("Plz enter name")
-        }
-        if (email?.getText().toString().length >= 0) {
-            val trimEmail = email?.getText().toString().trim { it <= ' ' }
-        } else {
-            email?.setError("Plz enter email")
-        }
-        if (password?.getText().toString().length >= 0) {
-            val trimPassword = password?.getText().toString().trim { it <= ' ' }
-        } else {
-            password?.setError("Plz enter password")
-        }
+//        if (name?.getText().toString().length >= 0) {
+//            val trimName = name?.getText().toString().trim { it <= ' ' }
+//        } else {
+//            name?.setError("Plz enter name")
+//        }
+//        if (email?.getText().toString().length >= 0) {
+//            val trimEmail = email?.getText().toString().trim { it <= ' ' }
+//        } else {
+//            email?.setError("Plz enter email")
+//        }
+//        if (password?.getText().toString().length >= 0) {
+//            val trimPassword = password?.getText().toString().trim { it <= ' ' }
+//        } else {
+//            password?.setError("Plz enter password")
+//        }
 
 //        name = name?.getText().toString().trim() { it <= ' '}
 //        email = email?.text.toString().trim() { it <= ' '}
 //        password = password.text.toString().trim() { it <= ' '}
 
-        if(validateForm(trimName,  trimEmail, trimPassword)){
-            Toast.makeText(this@SignUpActivity,"Now we can register a new user",Toast.LENGTH_LONG).show()
+        if(validateForm(name,  email, password)){
+//            Toast.makeText(this@SignUpActivity,"Now we can register a new user",Toast.LENGTH_LONG).show()
+            showProgressDialog(resources.getString(R.string.please_wait))
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(
+                email?.text.toString(),
+                password?.text.toString()
+            ).addOnCompleteListener { task ->
+                hideProgressDialog()
+                if (task.isSuccessful) {
+                    val firebaseUser: FirebaseUser = task.result!!.user!!
+                    val registerdEmail = firebaseUser.email
+                    Toast.makeText(
+                        this,
+                        "$name you have " + "succesfully registered the email address $registerdEmail",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    FirebaseAuth.getInstance().signOut()
+                    finish()
+                } else {
+                    Toast.makeText(this, task.exception!!.message, Toast.LENGTH_LONG).show()
+                }
+            }
         }
 
     }
-    private fun validateForm(trimName: TextView?, trimEmail: TextView?, trimPassword: TextView?): Boolean {
-        if (trimName?.text.toString().isEmpty()){
+    private fun validateForm(name: TextView?, email: TextView?, password: TextView?): Boolean {
+        if (name?.text.toString().isEmpty()){
             Toast.makeText(this,"Your name is blank",Toast.LENGTH_LONG).show()
             return false
-        }else{
-            return true
-        }
-        if (trimEmail?.text.toString().isEmpty()){
+        }else if(email?.text.toString().isEmpty()){
             Toast.makeText(this,"Your email is blank",Toast.LENGTH_LONG).show()
             return false
-        }else{
-            return true
-        }
-        if (trimPassword?.text.toString().isEmpty()){
+        }else if (password?.text.toString().isEmpty()){
             Toast.makeText(this,"Your password is blank",Toast.LENGTH_LONG).show()
             return false
         }else{
