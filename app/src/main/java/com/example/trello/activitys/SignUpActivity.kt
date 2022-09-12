@@ -102,7 +102,7 @@ class SignUpActivity : BaseActivity() {
                     FirebaseAuth.getInstance().signOut()
                     finish()
                 } else {
-                    Toast.makeText(this, task.exception!!.message, Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Registration failed", Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -123,22 +123,4 @@ class SignUpActivity : BaseActivity() {
         }
     }
 
-//    private fun validateForm(trimName: TextView?, trimEmail: TextView?, trimPassword: TextView?): Boolean{
-//        return when {
-//            TextUtils.isEmpty(trimName?.toString()){
-//               Toast.makeText(this,"Your name is empty")
-//                false
-//            }
-//                    TextUtils.isEmpty(email){
-//                showErrorSnackBar("Plesa enter an email")
-//                false
-//            }
-//                    TextUtils.isEmpty(password){
-//                showErrorSnackBar("Plesa enter a password")
-//                false
-//            }else{
-//                true
-//            }
-//        }
-//    }
 }
