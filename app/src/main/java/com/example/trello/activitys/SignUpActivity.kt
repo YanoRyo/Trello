@@ -17,9 +17,6 @@ class SignUpActivity : BaseActivity() {
     private var name: TextView? = null
     private var email: TextView? = null
     private var password: TextView? = null
-    private var trimName: TextView? = null
-    private var trimEmail: TextView? = null
-    private var trimPassword: TextView? = null
     private var signUpButton: Button? = null
 
 
@@ -73,26 +70,6 @@ class SignUpActivity : BaseActivity() {
         email = findViewById(R.id.et_email)
         password = findViewById(R.id.et_password)
 
-
-//        if (name?.getText().toString().length >= 0) {
-//            val trimName = name?.getText().toString().trim { it <= ' ' }
-//        } else {
-//            name?.setError("Plz enter name")
-//        }
-//        if (email?.getText().toString().length >= 0) {
-//            val trimEmail = email?.getText().toString().trim { it <= ' ' }
-//        } else {
-//            email?.setError("Plz enter email")
-//        }
-//        if (password?.getText().toString().length >= 0) {
-//            val trimPassword = password?.getText().toString().trim { it <= ' ' }
-//        } else {
-//            password?.setError("Plz enter password")
-//        }
-
-//        name = name?.getText().toString().trim() { it <= ' '}
-//        email = email?.text.toString().trim() { it <= ' '}
-//        password = password.text.toString().trim() { it <= ' '}
 
         if(validateForm(name,  email, password)){
 //            Toast.makeText(this@SignUpActivity,"Now we can register a new user",Toast.LENGTH_LONG).show()

@@ -8,6 +8,7 @@ import android.os.Handler
 import android.view.WindowManager
 import android.widget.TextView
 import com.example.trello.R
+import com.example.trello.firebase.FireStoreClass
 
 class SplashActivity : AppCompatActivity() {
 
@@ -25,6 +26,13 @@ class SplashActivity : AppCompatActivity() {
         appName.typeface = typeFace
 
         Handler().postDelayed({
+
+            var currentUserID = FireStoreClass().getCurrentUserId()
+//            if (currentUserID.isNotEmpty()){
+//                startActivity(Intent(this,IntroActivity::class.java))
+//            }else{
+//                startActivity(Intent(this, SignUpActivity::class.java))
+//            }
             startActivity(Intent(this, IntroActivity::class.java))
             finish()
         },2500)

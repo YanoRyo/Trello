@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.example.trello.R
+import com.example.trello.models.User
 import com.google.firebase.auth.FirebaseAuth
 
 class SignInActivity : BaseActivity() {
@@ -76,6 +77,12 @@ class SignInActivity : BaseActivity() {
 
         }
 
+    }
+
+    fun signInSuccess(user: User){
+        hideProgressDialog()
+        startActivity(Intent(this,IntroActivity::class.java))
+        finish()
     }
 
     private fun validateForm(email: TextView?, password: TextView?): Boolean {
