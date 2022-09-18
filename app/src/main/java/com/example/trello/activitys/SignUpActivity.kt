@@ -1,13 +1,14 @@
 package com.example.trello.activitys
 
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.example.trello.R
+import com.example.trello.firebase.FireStoreClass
+import com.example.trello.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
@@ -34,6 +35,16 @@ class SignUpActivity : BaseActivity() {
         )
 
         setUpActionBar()
+    }
+
+    fun userRegisteredSuccess(){
+        Toast.makeText(
+            this,
+            "you have succesfully registered",
+            Toast.LENGTH_LONG
+        ).show()
+        FirebaseAuth.getInstance().signOut()
+        finish()
     }
 
     private fun setUpActionBar(){
@@ -94,13 +105,10 @@ class SignUpActivity : BaseActivity() {
                 if (task.isSuccessful) {
                     val firebaseUser: FirebaseUser = task.result!!.user!!
                     val registerdEmail = firebaseUser.email
-                    Toast.makeText(
-                        this,
-                        "$name you have " + "succesfully registered the email address $registerdEmail",
-                        Toast.LENGTH_LONG
-                    ).show()
-                    FirebaseAuth.getInstance().signOut()
-                    finish()
+                    val user = User(firebaseUser.uid, name.toString(), registerdEmail.toString())
+//                    FirebaseAuth.getInstance().signOut()
+//                    finish()
+                    FireStoreClass().registerUser(this, user)
                 } else {
                     Toast.makeText(this, "Registration failed", Toast.LENGTH_LONG).show()
                 }
