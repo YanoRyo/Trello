@@ -1,4 +1,4 @@
-package com.example.trello.activitys
+package com.example.trello.activities
 
 import android.content.Intent
 import android.graphics.Typeface
@@ -28,12 +28,12 @@ class SplashActivity : AppCompatActivity() {
         Handler().postDelayed({
 
             var currentUserID = FireStoreClass().getCurrentUserId()
-//            if (currentUserID.isNotEmpty()){
-//                startActivity(Intent(this,IntroActivity::class.java))
-//            }else{
-//                startActivity(Intent(this, SignUpActivity::class.java))
-//            }
-            startActivity(Intent(this, IntroActivity::class.java))
+            if (currentUserID.isNotEmpty()){
+                startActivity(Intent(this, MainActivity::class.java))
+            }else{
+                startActivity(Intent(this, IntroActivity::class.java))
+            }
+//            startActivity(Intent(this, SplashActivity::class.java))
             finish()
         },2500)
     }

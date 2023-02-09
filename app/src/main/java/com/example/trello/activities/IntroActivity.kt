@@ -1,7 +1,6 @@
-package com.example.trello.activitys
+package com.example.trello.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Button

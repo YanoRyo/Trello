@@ -1,4 +1,4 @@
-package com.example.trello.activitys
+package com.example.trello.activities
 
 import android.os.Bundle
 import android.view.WindowManager
@@ -86,6 +86,8 @@ class SignUpActivity : BaseActivity() {
 //                    FirebaseAuth.getInstance().signOut()
 //                    finish()
                     FireStoreClass().registerUser(this, user)
+                    Toast.makeText(this, "Registration Success", Toast.LENGTH_LONG).show()
+
                 } else {
                     Toast.makeText(this, "Registration failed", Toast.LENGTH_LONG).show()
                 }
