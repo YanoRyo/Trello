@@ -1,5 +1,6 @@
 package com.example.trello.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Button
@@ -20,18 +21,14 @@ class SignUpActivity : BaseActivity() {
     private var password: TextView? = null
     private var signUpButton: Button? = null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
-
-
 
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
-
         setUpActionBar()
     }
 
@@ -61,13 +58,9 @@ class SignUpActivity : BaseActivity() {
         signUpButton?.setOnClickListener {
             registerUser()
         }
-
-
     }
 
     private fun registerUser() {
-
-
         name = findViewById<EditText>(R.id.et_name)
         email = findViewById(R.id.et_email)
         password = findViewById(R.id.et_password)
@@ -87,13 +80,12 @@ class SignUpActivity : BaseActivity() {
                     val user = User(firebaseUser.uid, realName, registeredEmail.toString())
                     FireStoreClass().registerUser(this, user)
                     Toast.makeText(this, "Registration Success", Toast.LENGTH_LONG).show()
-
+                    startActivity(Intent(this, MainActivity::class.java))
                 } else {
                     Toast.makeText(this, "Registration failed", Toast.LENGTH_LONG).show()
                 }
             }
         }
-
     }
 
     private fun validateForm(name: TextView?, email: TextView?, password: TextView?): Boolean {
@@ -110,5 +102,4 @@ class SignUpActivity : BaseActivity() {
             return true
         }
     }
-
 }

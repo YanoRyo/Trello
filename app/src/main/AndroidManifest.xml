@@ -16,10 +16,14 @@
         <activity
             android:name=".activities.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Trello.NoActionBar" /> />
+            android:theme="@style/Theme.Trello.NoActionBar" />
         <activity
             android:name=".activities.BaseActivity"
             android:exported="false" />
+        <activity
+            android:name=".activities.MyProfileActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Trello.NoActionBar" />
         <activity
             android:name=".activities.SignInActivity"
             android:screenOrientation="portrait"
