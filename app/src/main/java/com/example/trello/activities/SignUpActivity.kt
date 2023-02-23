@@ -3,6 +3,7 @@ package com.example.trello.activities
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
@@ -34,27 +35,27 @@ class SignUpActivity : BaseActivity() {
         setUpActionBar()
     }
 
-    fun userRegisteredSuccess(){
+    fun userRegisteredSuccess() {
         Toast.makeText(
             this,
-            "you have succesfully registered",
+            "you have successfully registered",
             Toast.LENGTH_LONG
         ).show()
         FirebaseAuth.getInstance().signOut()
         finish()
     }
 
-    private fun setUpActionBar(){
+    private fun setUpActionBar() {
         val tbSignUpBar: Toolbar = findViewById(R.id.toolbar_sign_up_activity)
         setSupportActionBar(tbSignUpBar)
         signUpButton = findViewById(R.id.btn_sign_up)
 
         val actionBar = supportActionBar
-        if (actionBar != null){
+        if (actionBar != null) {
             actionBar?.setDisplayHomeAsUpEnabled(true)
             actionBar?.setHomeAsUpIndicator(R.drawable.ic_black_color_back_24dp)
         }
-        tbSignUpBar.setNavigationOnClickListener{
+        tbSignUpBar.setNavigationOnClickListener {
             onBackPressed()
         }
         signUpButton?.setOnClickListener {
@@ -64,15 +65,16 @@ class SignUpActivity : BaseActivity() {
 
     }
 
-    private fun registerUser(){
+    private fun registerUser() {
 
-        name = findViewById(R.id.et_name)
+
+        name = findViewById<EditText>(R.id.et_name)
         email = findViewById(R.id.et_email)
         password = findViewById(R.id.et_password)
 
+        val realName = name?.text.toString()
 
-        if(validateForm(name,  email, password)){
-//            Toast.makeText(this@SignUpActivity,"Now we can register a new user",Toast.LENGTH_LONG).show()
+        if (validateForm(name, email, password)) {
             showProgressDialog(resources.getString(R.string.please_wait))
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(
                 email?.text.toString(),
@@ -81,10 +83,8 @@ class SignUpActivity : BaseActivity() {
                 hideProgressDialog()
                 if (task.isSuccessful) {
                     val firebaseUser: FirebaseUser = task.result!!.user!!
-                    val registerdEmail = firebaseUser.email
-                    val user = User(firebaseUser.uid, name.toString(), registerdEmail.toString())
-//                    FirebaseAuth.getInstance().signOut()
-//                    finish()
+                    val registeredEmail = firebaseUser.email
+                    val user = User(firebaseUser.uid, realName, registeredEmail.toString())
                     FireStoreClass().registerUser(this, user)
                     Toast.makeText(this, "Registration Success", Toast.LENGTH_LONG).show()
 
@@ -95,17 +95,18 @@ class SignUpActivity : BaseActivity() {
         }
 
     }
+
     private fun validateForm(name: TextView?, email: TextView?, password: TextView?): Boolean {
-        if (name?.text.toString().isEmpty()){
-            Toast.makeText(this,"Your name is blank",Toast.LENGTH_LONG).show()
+        if (name?.text.toString().isEmpty()) {
+            Toast.makeText(this, "Your name is blank", Toast.LENGTH_LONG).show()
             return false
-        }else if(email?.text.toString().isEmpty()){
-            Toast.makeText(this,"Your email is blank",Toast.LENGTH_LONG).show()
+        } else if (email?.text.toString().isEmpty()) {
+            Toast.makeText(this, "Your email is blank", Toast.LENGTH_LONG).show()
             return false
-        }else if (password?.text.toString().isEmpty()){
-            Toast.makeText(this,"Your password is blank",Toast.LENGTH_LONG).show()
+        } else if (password?.text.toString().isEmpty()) {
+            Toast.makeText(this, "Your password is blank", Toast.LENGTH_LONG).show()
             return false
-        }else{
+        } else {
             return true
         }
     }

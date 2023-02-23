@@ -3,14 +3,19 @@ package com.example.trello.activities
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.bumptech.glide.Glide
 import com.example.trello.R
+import com.example.trello.firebase.FireStoreClass
+import com.example.trello.models.User
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import de.hdodenhof.circleimageview.CircleImageView
 
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -21,6 +26,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         setupActionBar()
         val navView = this.findViewById<NavigationView>(R.id.nav_view)
         navView.setNavigationItemSelectedListener(this)
+
+        FireStoreClass().signInUser(this)
 
         // 「android.R.color.transparent」を指定することで、ステータスバーを透過させている
         window.statusBarColor = ContextCompat.getColor(this, android.R.color.transparent)
@@ -52,6 +59,18 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         } else {
             doubleBackToExit()
         }
+    }
+
+    fun updateNavigationUserDetails(user: User) {
+        val navUserImage = findViewById<CircleImageView>(R.id.nav_user_image)
+        val tvUserName = findViewById<TextView>(R.id.tv_user_name)
+        Glide
+            .with(this)
+            .load(user.image)
+            .centerCrop()
+            .placeholder(R.drawable.ic_user_place_holder)
+            .into(navUserImage);
+        tvUserName.text = user.name
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
