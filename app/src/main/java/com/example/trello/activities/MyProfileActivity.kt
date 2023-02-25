@@ -145,6 +145,7 @@ class MyProfileActivity : BaseActivity() {
                 .centerCrop()
                 .placeholder(R.drawable.ic_user_place_holder)
                 .into(it)
+            etUserName.text = user.name
         }
         etUserName.text = user.name
         etUserEmail.text = user.email
@@ -210,6 +211,7 @@ class MyProfileActivity : BaseActivity() {
 
     fun profileUpdateSuccess() {
         hideProgressDialog()
+        setResult(Activity.RESULT_OK)
         finish()
     }
 }
